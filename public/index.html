@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Money Rush - BIZ SRESHTA 26</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logos">
+        <img id="uniLogo" class="logo" src="/assets/university.png" alt="University Logo" />
+        <img id="eventLogo" class="logo" src="/assets/event.png" alt="Event Logo" />
+      </div>
+      <div> 
+        <div class="title" id="titleText">BIZ SRESHTA 26</div>
+        <div class="subtitle">Money Rush (Budget Race)</div>
+      </div>
+    </div>
+    <div class="right">
+      <button class="btn ghost" id="soundToggle">Sound: ON</button>
+      <div class="pill" id="phasePill">Loading...</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <nav class="sidenav" aria-label="Sections">
+      <button class="tab active" data-tab="reg">Registration</button>
+      <button class="tab" data-tab="agent">Agents</button>
+      <button class="tab" data-tab="events">Events</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </nav>
+
+    <section class="panel">
+      <div class="tabview active" id="tab-reg">
+        <h2>Team Registration</h2>
+        <p class="muted">Team name is unique and will be locked after registration.</p>
+
+        <div class="card">
+            <h3>Register Team</h3>
+            <div class="form">
+              <label>Team Name<input id="teamName" placeholder="Enter unique team name"/></label>
+              <div class="grid2">
+                <label>Member 1 Name<input id="m1Name" placeholder="Member 1 name"/></label>
+                <label>Member 1 Institute<input id="m1Inst" placeholder="Institute"/></label>
+              </div>
+              <div class="grid2">
+                <label>Member 2 Name<input id="m2Name" placeholder="Member 2 name"/></label>
+                <label>Member 2 Institute<input id="m2Inst" placeholder="Institute"/></label>
+              </div>
+              <button class="btn" id="registerBtn">Submit Registration</button>
+              <div class="msg" id="regMsg"></div>
+            </div>
+        </div>
+      </div>
+
+      <div class="tabview" id="tab-agent">
+        <h2>Agent Console</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>Agent Login</h3>
+            <div class="form">
+              <label>Agent Username<input id="agentUser" placeholder="AG_GOLD, AG_BANK, ..."/></label>
+              <label>PIN<input id="agentPin" type="password" placeholder="1234"/></label>
+              <button class="btn" id="agentLoginBtn">Login</button>
+              <div class="msg" id="agentMsg"></div>
+              <div class="muted small">Each agent is locked to one investment avenue.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Agent Actions</h3>
+            <div class="kv">
+              <div><span class="muted">Logged in as</span> <span id="agentName">-</span></div>
+              <div><span class="muted">Avenue</span> <span id="agentAvenue">-</span></div>
+              <div><span class="muted">Phase</span> <span id="agentPhase">-</span></div>
+              <div><span class="muted">Timer</span> <span id="agentTimer">-</span></div>
+            </div>
+
+            <div class="notice" id="agentNotifBox" style="display:none">
+              <div class="noticeTitle">New Event Notification</div>
+              <div id="agentNotifText" class="noticeText"></div>
+              <button class="btn" id="acceptEventBtn">Accept and Apply</button>
+            </div>
+
+            <div class="form">
+              <label>Team<select id="txTeam"></select></label>
+              <div class="grid3">
+                <label>Action
+                  <select id="txAction">
+                    <option value="invest">Invest</option>
+                    <option value="withdraw">Withdraw</option>
+                    <option value="transfer">Transfer</option>
+                  </select>
+                </label>
+                <label>Amount<input id="txAmount" type="number" min="1" step="1"/></label>
+                <label>To (for transfer)
+                  <select id="txToAvenue"></select>
+                </label>
+              </div>
+              <button class="btn" id="txSubmitBtn">Submit</button>
+              <div class="msg" id="txMsg"></div>
+              <div class="muted small">During trading window only.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabview" id="tab-settings">
+        <h2>Settings (Admin)</h2>
+        <div class="card">
+          <div class="form inline">
+            <input id="adminPin2" placeholder="Admin PIN" type="password"/>
+            <button class="btn" id="adminLoginBtn2">Admin Login</button>
+            <span class="muted small" id="adminStatus2"></span>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Game Settings</h3>
+            <div class="form">
+              <label>Starting Money<input id="setStart" type="number" min="1"/></label>
+              <label>Number of Rounds<input id="setRounds" type="number" min="1"/></label>
+              <label>Market Open Seconds<input id="setMarketOpen" type="number" min="10"/></label>
+              <label>Trading Window Seconds<input id="setTrading" type="number" min="10"/></label>
+              <button class="btn" id="saveSettingsBtn">Save Settings</button>
+              <button class="btn warn" id="initGameBtn">Initialize / Reset Game</button>
+              <button class="btn danger" id="resetAllBtn">Reset Everything (Hard Reset)</button>
+              <div class="msg" id="settingsMsg"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Market Conditions and 12 Events</h3>
+            <p class="muted">Add market conditions, then add up to 12 events per condition. Market Scan picks a random condition and auto-loads its 12 events into the wheel.</p>
+            <div class="form">
+              <label>New Market Condition<input id="mcTitle" placeholder="Example: US-India tariff war..."/></label>
+              <button class="btn" id="addMcBtn">Add Market Condition</button>
+              <div class="divider"></div>
+              <label>Selected Market Condition<select id="mcSelect"></select></label>
+              <div class="grid2">
+                <label>Event Text<input id="evText" placeholder="Example: IT sector rallies..."/></label>
+                <label>Affected Avenue<select id="evAvenue"></select></label>
+              </div>
+              <div class="grid2">
+                <label>Direction<select id="evDir"><option value="increase">Increase</option><option value="decrease">Decrease</option></select></label>
+                <label>Rate (%)<input id="evRate" type="number" min="0" step="0.1"/></label>
+              </div>
+              <button class="btn" id="addEventBtn">Add Event to Wheel (max 12)</button>
+              <div class="msg" id="mcMsg"></div>
+              <div id="eventsList" class="small muted"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabview" id="tab-events">
+        <h2>Events and Spin Wheel (Admin)</h2>
+        <div class="card">
+          <div class="form inline">
+            <input id="adminPin3" placeholder="Admin PIN" type="password"/>
+            <button class="btn" id="adminLoginBtn3">Admin Login</button>
+            <span class="muted small" id="adminStatus3"></span>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Round Control</h3>
+            <div class="kv">
+              <div><span class="muted">Round</span> <span id="roundText">-</span></div>
+              <div><span class="muted">Market Headline</span> <span id="headlineText">-</span></div>
+              <div><span class="muted">Phase</span> <span id="phaseText">-</span></div>
+              <div><span class="muted">Timer</span> <span id="phaseTimer">-</span></div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" id="marketScanBtn">Market Scan</button>
+              <button class="btn" id="beginSpinBtn">Show Effect and Open Wheel</button>
+              <button class="btn" id="spinBtn">Spin Event</button>
+              <button class="btn" id="openTradingBtn">Open Trading Window</button>
+              <button class="btn" id="closeTradingBtn">Close Trading and Next Round</button>
+              <button class="btn warn" id="endGameBtn">End Game (Apply Tax)</button>
+              <a class="btn ghost" href="/display" target="_blank">Open Projector Display</a>
+              <a class="btn ghost" href="/api/print" target="_blank">Printable Results Page</a>
+            </div>
+
+            <div class="msg" id="eventsMsg"></div>
+          </div>
+
+          <div class="card">
+            <h3>Wheel and Round Events</h3>
+            <div class="wheelWrap">
+              <div class="wheel" id="wheel">
+                <div class="wheelInner" id="wheelInner"></div>
+              </div>
+              <div class="wheelLabel" id="wheelLabel">Wheel</div>
+            </div>
+            <div class="eventHistory" id="eventHistory"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div id="copyrightText"></div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

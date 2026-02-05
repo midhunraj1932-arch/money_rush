@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Money Rush Display</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body class="display">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logos">
+        <img class="logo" src="/assets/university.png" alt="University Logo" />
+        <img class="logo" src="/assets/event.png" alt="Event Logo" />
+      </div>
+      <div>
+        <div class="title" id="dTitle">BIZ SRESHTA 26</div>
+        <div class="subtitle">Money Rush Live Display</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="pill" id="dPhase">-</div>
+      <div class="pill" id="dTimer">-</div>
+    </div>
+  </header>
+
+  <main class="displayGrid">
+    <section class="card big">
+      <h2 id="dRound">Round -</h2>
+      <div class="headline" id="dHeadline">Waiting for market scan...</div>
+      <div class="muted" id="dMarketOpen"></div>
+      <div class="eventHistory" id="dEvents"></div>
+    </section>
+
+    <section class="card">
+      <h3>Live Return Rates (%)</h3>
+      <div id="dRates" class="rates"></div>
+    </section>
+
+    <section class="card">
+      <h3>Leaderboard (Pre-Tax)</h3>
+      <div class="tablewrap">
+        <table class="table" id="dTable">
+          <thead><tr><th>#</th><th>Team</th><th>Cash</th><th>Total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Dispute Mode (Team Statement)</h3>
+      <label class="muted">Select Team</label>
+      <select id="dTeam"></select>
+      <div class="statement" id="dStatement"></div>
+    </section>
+  </main>
+
+  <script src="/display.js"></script>
+</body>
+</html>
